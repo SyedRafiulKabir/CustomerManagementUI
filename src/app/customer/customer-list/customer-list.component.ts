@@ -5,10 +5,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-customer-list',
-  standalone: false,
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+    selector: 'app-customer-list',
+    standalone: false,
+    templateUrl: './customer-list.component.html',
+    styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
     displayedColumns: string[] = ['customerId', 'customerName', 'address', 'businessStartDate', 'customerType', 'phone', 'email', 'creditLimit', 'actions'];
@@ -16,6 +16,7 @@ export class CustomerListComponent implements OnInit {
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+    isEditMode: boolean = false; // To track if we're in edit mode
     selectedCustomer: Customer | null = null; // To store the selected customer for editing
 
     constructor(private customerService: CustomerService) {}
@@ -34,8 +35,9 @@ export class CustomerListComponent implements OnInit {
         });
     }
 
-    // Open the edit form with selected customer
+    // Open the form in edit mode with selected customer
     editCustomer(customer: Customer) {
+        this.isEditMode = true;
         this.selectedCustomer = { ...customer }; // Create a copy to avoid direct mutation
     }
 
@@ -46,11 +48,19 @@ export class CustomerListComponent implements OnInit {
             this.dataSource.data[index] = updatedCustomer;
             this.dataSource._updateChangeSubscription(); // Refresh table data
         }
-        this.selectedCustomer = null; // Hide form after update
+        this.resetForm();
     }
 
-    // Cancel editing
-    cancelEdit() {
+    // Handle customer addition
+    onCustomerAdded(newCustomer: Customer) {
+        this.dataSource.data = [newCustomer, ...this.dataSource.data]; // Add new customer to the top of the list
+        this.dataSource._updateChangeSubscription(); // Refresh table data
+        this.resetForm();
+    }
+
+    // Reset the form and switch to insert mode
+    resetForm() {
+        this.isEditMode = false;
         this.selectedCustomer = null;
     }
 

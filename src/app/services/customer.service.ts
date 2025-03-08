@@ -36,4 +36,29 @@ export class CustomerService {
     deleteCustomer(id: number): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
+    uploadPhoto(formData: FormData): Observable<any> {
+        return this.http.post('/api/upload-photo', formData);
+    }
+    // Fetch filtered customers
+  getFilteredCustomers(customerType: string, businessStartFrom: string, businessStartTo: string): Observable<any[]> {
+    const params: any = {};
+    if (customerType) params.customerType = customerType;
+    if (businessStartFrom) params.businessStartFrom = businessStartFrom;
+    if (businessStartTo) params.businessStartTo = businessStartTo;
+
+    return this.http.get<any[]>(`${this.apiUrl}/report`, { params });
+  }
+
+  // Export report
+  exportCustomerReport(customerType: string, businessStartFrom: string, businessStartTo: string, format: string): Observable<Blob> {
+    const params: any = { format };
+    if (customerType) params.customerType = customerType;
+    if (businessStartFrom) params.businessStartFrom = businessStartFrom;
+    if (businessStartTo) params.businessStartTo = businessStartTo;
+
+    return this.http.post(`${this.apiUrl}/export-report`, null, {
+      params,
+      responseType: 'blob',
+    });
+  }
 }
