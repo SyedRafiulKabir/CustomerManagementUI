@@ -16,6 +16,6 @@ export interface Customer {
   phone: string;
   email: string;
   creditLimit: number;
-  photoUrl: string;
+  photoPath: string;
   deliveryAddressInfo: DeliveryAddress[];
 }

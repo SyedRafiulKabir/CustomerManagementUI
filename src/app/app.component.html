@@ -1,1 +1,24 @@
-<router-outlet />
+<div class="container-fluid">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div id="navbar" class="navbar-collapse collapse" style="width: 100% !important;">
+        <!-- Application Title -->
+        <div class="title-container">
+          <span class="fs-1 text-light fw-bold">Customer Management</span>
+        </div>
+  
+        <!-- Navigation Links -->
+        <div class="tabs-container">
+          <ul class="nav navbar-nav">
+            <li [routerLinkActive]="['active']" class="nav-item">
+              <a routerLink="/customer"><span id="tabstyle"><b>Customer</b></span></a>
+            </li>
+            <li [routerLinkActive]="['active']" class="nav-item">
+              <a routerLink="/customer/report"><span id="tabstyle"><b>Customer Report</b></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <router-outlet></router-outlet>
+</div>

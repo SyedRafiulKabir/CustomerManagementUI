@@ -12,14 +12,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
     declarations: [
         CustomerComponent,
         CustomerFormComponent,
-        CustomerListComponent
+        CustomerListComponent,
+        ReportComponent
     ],
     imports: [
         CommonModule,
@@ -30,7 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatPaginatorModule,
         MatSortModule,
         MatButtonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
          
     ],
     exports: [],

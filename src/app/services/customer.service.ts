@@ -44,7 +44,6 @@ export class CustomerService {
     const params: any = {};
     if (customerType) params.customerType = customerType;
     if (businessStartFrom) params.businessStartFrom = businessStartFrom;
-    if (businessStartTo) params.businessStartTo = businessStartTo;
 
     return this.http.get<any[]>(`${this.apiUrl}/report`, { params });
   }

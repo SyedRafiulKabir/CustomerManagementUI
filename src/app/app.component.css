@@ -1,0 +1,59 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #343a40; /* Dark background */
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 10px 0;
+  }
+  
+  /* Title Container */
+  .title-container {
+    display: flex;
+    justify-content: center; /* Center the title */
+    width: 100%;
+    margin-bottom: 10px; /* Space between title and tabs */
+  }
+  
+  .title-container span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  /* Tabs Container */
+  .tabs-container {
+    display: flex;
+    justify-content: center; /* Center the tabs */
+    width: 100%;
+  }
+  
+  .tabs-container ul {
+    display: flex;
+    gap: 20px; /* Space between tabs */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tabs-container li {
+    display: inline-block;
+  }
+  
+  .tabs-container a {
+    color: #fff; /* White text */
+    font-size: 16px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tabs-container a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+  }
+  
+  /* Active Link */
+  .tabs-container .active a {
+    color: #fff;
+    border-radius: 4px;
+  } 

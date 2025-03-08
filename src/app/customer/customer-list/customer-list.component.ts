@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
     styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
-    displayedColumns: string[] = ['customerId', 'customerName', 'address', 'businessStartDate', 'customerType', 'phone', 'email', 'creditLimit', 'actions'];
+    displayedColumns: string[] = ['customerId', 'customerName', 'address', 'businessStartDate', 'customerType', 'creditLimit', 'actions'];
     dataSource = new MatTableDataSource<Customer>([]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
