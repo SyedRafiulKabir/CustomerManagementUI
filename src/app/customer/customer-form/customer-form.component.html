@@ -1,1 +1,113 @@
-<p>customer-form works!</p>
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="customer-form">
+    <!-- Customer Name -->
+    <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input id="customerName" formControlName="customerName" class="form-control" />
+        <div *ngIf="customerForm.controls['customerName'].invalid && customerForm.controls['customerName'].touched" class="error-message">
+            <span>Customer Name is required.</span>
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input id="address" formControlName="address" class="form-control" />
+        <div *ngIf="customerForm.controls['address'].invalid && customerForm.controls['address'].touched" class="error-message">
+            <span>Address is required.</span>
+        </div>
+    </div>
+
+    <!-- Business Start Date -->
+    <div class="form-group">
+        <label for="businessStartDate">Business Start Date</label>
+        <input type="date" id="businessStartDate" formControlName="businessStartDate" class="form-control" />
+        <div *ngIf="customerForm.controls['businessStartDate'].invalid && customerForm.controls['businessStartDate'].touched" class="error-message">
+            <span>Business Start Date is required.</span>
+        </div>
+    </div>
+
+    <!-- Customer Type -->
+    <div class="form-group">
+        <label for="customerType">Customer Type</label>
+        <select id="customerType" formControlName="customerType" class="form-control">
+            <option value="" disabled selected>Select Customer Type</option>
+            <option value="Dealer">Dealer</option>
+            <option value="Retailer">Retailer</option>
+            <option value="Corporate">Corporate</option>
+            <option value="Online">Online</option>
+            <option value="Export">Export</option>
+        </select>
+        <div *ngIf="customerForm.controls['customerType'].invalid && customerForm.controls['customerType'].touched" class="error-message">
+            <span>Customer Type is required.</span>
+        </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input id="phone" formControlName="phone" class="form-control" />
+        <div *ngIf="customerForm.controls['phone'].invalid && customerForm.controls['phone'].touched" class="error-message">
+            <span *ngIf="customerForm.controls['phone'].errors?.['required']">Phone is required.</span>
+            <span *ngIf="customerForm.controls['phone'].errors?.['invalidPhone']">Phone must start with 01 and have exactly 11 digits.</span>
+        </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" class="form-control" />
+        <div *ngIf="customerForm.controls['email'].invalid && customerForm.controls['email'].touched" class="error-message">
+            <span *ngIf="customerForm.controls['email'].errors?.['required']">Email is required.</span>
+            <span *ngIf="customerForm.controls['email'].errors?.['email']">Please enter a valid email address.</span>
+        </div>
+    </div>
+
+    <!-- Credit Limit -->
+    <div class="form-group">
+        <label for="creditLimit">Credit Limit</label>
+        <input type="number" id="creditLimit" formControlName="creditLimit" class="form-control" />
+        <div *ngIf="customerForm.controls['creditLimit'].invalid && customerForm.controls['creditLimit'].touched" class="error-message">
+            <span *ngIf="customerForm.controls['creditLimit'].errors?.['required']">Credit Limit is required.</span>
+            <span *ngIf="customerForm.controls['creditLimit'].errors?.['min']">Credit Limit must be at least 1000.</span>
+            <span *ngIf="customerForm.controls['creditLimit'].errors?.['max']">Credit Limit cannot exceed 1,000,000.</span>
+        </div>
+    </div>
+
+    <!-- Delivery Address Section -->
+    <div formArrayName="deliveryAddressInfo">
+        <div *ngFor="let address of deliveryAddresses.controls; let i = index" [formGroupName]="i">
+            <div class="form-group">
+                <label for="address{{i}}">Delivery Address</label>
+                <input id="address{{i}}" formControlName="address" class="form-control" />
+                <div *ngIf="address.get('address')?.invalid && address.get('address')?.touched" class="error-message">
+                    <span>Address is required.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactPersonName{{i}}">Contact Person Name</label>
+                <input id="contactPersonName{{i}}" formControlName="contactPersonName" class="form-control" />
+                <div *ngIf="address.get('contactPersonName')?.invalid && address.get('contactPersonName')?.touched" class="error-message">
+                    <span>Contact Person Name is required.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone{{i}}">Phone</label>
+                <input id="phone{{i}}" formControlName="phone" class="form-control" />
+                <div *ngIf="address.get('phone')?.invalid && address.get('phone')?.touched" class="error-message">
+                    <span *ngIf="address.get('phone')?.errors?.['required']">Phone is required.</span>
+                    <span *ngIf="address.get('phone')?.errors?.['pattern']">Phone must start with 01 and have 11 digits.</span>
+                </div>
+            </div>
+
+            <!-- Remove Button (Only show if more than 1 address) -->
+            <button type="button" class="btn btn-danger" (click)="removeDeliveryAddress(i)" *ngIf="deliveryAddresses.length > 1">Remove Address</button>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="addDeliveryAddress()">Add Delivery Address</button>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="customerForm.invalid" class="submit-button">Submit</button>
+</form>

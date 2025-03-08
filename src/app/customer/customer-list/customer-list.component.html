@@ -1,0 +1,54 @@
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="customerId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Customer ID </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="customerName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.customerName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.address }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="businessStartDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.businessStartDate | date:'yyyy-MM-dd' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="customerType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.customerType }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.phone }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="creditLimit">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Credit Limit </mat-header-cell>
+        <mat-cell *matCellDef="let customer"> {{ customer.creditLimit | currency }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let customer">
+            <button mat-button color="primary" (click)="editCustomer(customer)">Edit</button>
+            <button mat-button color="warn" (click)="deleteCustomer(customer)">Delete</button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
